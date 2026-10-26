@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Flash - Estacionamento</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚗 Projeto Flash</h1>
+            <p>Sistema de Estacionamento de Veículos</p>
+        </header>
+
+        <!-- Navegação -->
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+            <button class="tab-btn" data-tab="entrada-saida">Entrada / Saída</button>
+            <button class="tab-btn" data-tab="clientes">Clientes</button>
+            <button class="tab-btn" data-tab="veiculos">Veículos</button>
+            <button class="tab-btn" data-tab="vagas">Vagas</button>
+        </nav>
+
+        <!-- ==================== DASHBOARD ==================== -->
+        <section id="dashboard" class="tab-content active">
+            <h2>📊 Dashboard</h2>
+            <div class="cards" id="cards-relatorio">
+                <!-- Preenchido via JS -->
+            </div>
+
+            <h3>Veículos Estacionados Agora</h3>
+            <div class="table-container">
+                <table id="tabela-estacionados">
+                    <thead>
+                        <tr>
+                            <th>Placa</th>
+                            <th>Modelo</th>
+                            <th>Vaga</th>
+                            <th>Tipo</th>
+                            <th>Entrada</th>
+                            <th>Cliente</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ==================== ENTRADA / SAÍDA ==================== -->
+        <section id="entrada-saida" class="tab-content">
+            <h2>🔄 Entrada e Saída</h2>
+            
+            <div class="form-grid">
+                <!-- Entrada -->
+                <div class="card-form">
+                    <h3>Registrar Entrada</h3>
+                    <form id="form-entrada">
+                        <div class="form-group">
+                            <label>Placa do Veículo</label>
+                            <input type="text" id="placa-entrada" placeholder="ABC1D23" required maxlength="8">
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo de Vaga</label>
+                            <select id="tipo-vaga">
+                                <option value="normal">Normal</option>
+                                <option value="preferencial">Preferencial</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success">Registrar Entrada</button>
+                    </form>
+                </div>
+
+                <!-- Saída -->
+                <div class="card-form">
+                    <h3>Registrar Saída</h3>
+                    <form id="form-saida">
+                        <div class="form-group">
+                            <label>Placa do Veículo</label>
+                            <input type="text" id="placa-saida" placeholder="ABC1D23" required maxlength="8">
+                        </div>
+                        <button type="submit" class="btn btn-danger">Registrar Saída</button>
+                    </form>
+                    <div id="resultado-saida" class="resultado"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CLIENTES ==================== -->
+        <section id="clientes" class="tab-content">
+            <h2>👤 Cadastro de Clientes</h2>
+            
+            <div class="card-form">
+                <form id="form-cliente">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nome Completo *</label>
+                            <input type="text" id="cliente-nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Documento (CPF/CNPJ)</label>
+                            <input type="text" id="cliente-documento">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Telefone</label>
+                            <input type="text" id="cliente-telefone">
+                        </div>
+                        <div class="form-group">
+                            <label>E-mail</label>
+                            <input type="email" id="cliente-email">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cadastrar Cliente</button>
+                </form>
+            </div>
+
+            <h3>Clientes Cadastrados</h3>
+            <div class="table-container">
+                <table id="tabela-clientes">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Documento</th>
+                            <th>Telefone</th>
+                            <th>E-mail</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ==================== VEÍCULOS ==================== -->
+        <section id="veiculos" class="tab-content">
+            <h2>🚙 Cadastro de Veículos</h2>
+            
+            <div class="card-form">
+                <form id="form-veiculo">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Placa *</label>
+                            <input type="text" id="veiculo-placa" required maxlength="8" placeholder="ABC1D23">
+                        </div>
+                        <div class="form-group">
+                            <label>Marca / Modelo</label>
+                            <input type="text" id="veiculo-modelo" placeholder="Ex: Toyota Corolla">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Cor</label>
+                            <input type="text" id="veiculo-cor">
+                        </div>
+                        <div class="form-group">
+                            <label>Tamanho</label>
+                            <select id="veiculo-tamanho">
+                                <option value="">Selecione</option>
+                                <option value="pequeno">Pequeno</option>
+                                <option value="medio">Médio</option>
+                                <option value="grande">Grande</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Tipo</label>
+                            <select id="veiculo-tipo">
+                                <option value="">Selecione</option>
+                                <option value="carro">Carro</option>
+                                <option value="moto">Moto</option>
+                                <option value="utilitario">Utilitário</option>
+                                <option value="caminhao">Caminhão</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Ano</label>
+                            <input type="number" id="veiculo-ano" min="1900" max="2030">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Cliente (opcional)</label>
+                        <select id="veiculo-cliente">
+                            <option value="">Sem cliente vinculado</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cadastrar Veículo</button>
+                </form>
+            </div>
+
+            <h3>Veículos Cadastrados</h3>
+            <div class="table-container">
+                <table id="tabela-veiculos">
+                    <thead>
+                        <tr>
+                            <th>Placa</th>
+                            <th>Modelo</th>
+                            <th>Cor</th>
+                            <th>Tipo</th>
+                            <th>Ano</th>
+                            <th>Cliente</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ==================== VAGAS ==================== -->
+        <section id="vagas" class="tab-content">
+            <h2>🅿️ Status das Vagas</h2>
+            <div id="mapa-vagas" class="mapa-vagas">
+                <!-- Preenchido via JS -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Toast de notificação -->
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
